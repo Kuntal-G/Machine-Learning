@@ -1,5 +1,3 @@
-# Machine-Learning
-
 Machine Learning Repository containing following projects:
 -------------------------------------------------------------
 
