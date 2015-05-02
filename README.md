@@ -5,7 +5,7 @@ Machine Learning Repository containing following projects:
 This contains the programming exercise of the coursera Machine Learning course (ML008- https://www.coursera.org/course/ml) 
 from Standford University by Prof. Andrew NG. It's done with Octave programming language.
 
-*Certificate:
+**Certificate:**
 ![alt tag](https://github.com/Kuntal-G/Machine-Learning/blob/master/Coursera-008/ml.jpg)
 
 #Machine Learning-Mahout:
