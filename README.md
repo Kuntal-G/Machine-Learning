@@ -11,7 +11,7 @@ This contains the recommender system (User & Item) based with Apache Mahout.
 
 #Machine Learning-R:
 Real World example of Machine Learning(supervised & unsupervised) with R programming Language.
-Also example with R-Hadoop and R-Hbase to process big dataset
+Example with R-Hadoop, R-Hbase and R-Hive to process big dataset.Also deeplearning with H2O.
 
 #Machine Learning-Python:
 Real usecase example of Machine Learning(supervised & unsupervised) with python programming Language.
