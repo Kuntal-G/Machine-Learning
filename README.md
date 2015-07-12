@@ -17,4 +17,4 @@ Example with R-Hadoop, R-Hbase and R-Hive to process big dataset.Also deeplearni
 Real usecase example of Machine Learning(supervised & unsupervised) with python programming Language.
 
 #Machine Learning-Spark(MLIB):
-High Scalable Machine Learning(supervised & unsupervised) example  with Spark.It's done with Scala and python programming language.
+High Scalable Machine Learning(supervised & unsupervised) example  with Spark.It's done with Scala and Python programming language.
