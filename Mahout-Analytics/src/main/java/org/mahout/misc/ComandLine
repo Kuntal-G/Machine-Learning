@@ -1,0 +1,58 @@
+Download Dataset
+http://static.echonest.com/Lastfm-ArtistTags2007.tar.gz
+
+Creating Sequenc Files from Command
+mahout seqdirectory -i $WORK_DIR/original -o $WORK_DIR/sequencesfiles
+
+To look at the generated file we could use the following seqdumper command:
+mahout seqdumper -i $WORK_DIR/sequencesfiles/chunk-0 | more
+
+
+Naive BAyes datset
+wget http://people.csail.mit.edu/jrennie/20Newsgroups/20news-bydate.tar.gz
+
+We need to now transform all these files into Hadoop sequence files. To do this, you need to just type the following command:
+./mahout seqdirectory -i ${WORK_DIR}/20news-all -o ${WORK_DIR}/20news-seq
+
+To examine the outcome, you can use the Hadoop command-line option fs . So, for example, if you would like to see what is in the chunck-0 file, you could type in the following command:
+hadoop fs -text $WORK_DIR/20news-seq/chunck-0 | more
+
+
+We need to transform the raw text into vectors of weights and frequency. To do this, we type in the following command:
+
+./mahout seq2sparse -i ${WORK_DIR}/20news-seq -o ${WORK_DIR}/20news-vectors -lnorm -nv -wt tfidf
+
+
+The following command parameters are described briefly:
+The -lnorm parameter instructs the vector to use the L_2 norm as a distance
+The -nv parameter is an optional parameter that outputs the vector as namedVector
+The -wt parameter instructs which weight function needs to be used
+
+
+A good dividing percentage is shown to be 80 percent and 20 percent, meaning that the training data should be 80 percent of the total while the testing ones should be the remaining
+20 percent.To split data, we use the following command:
+
+./mahout split
+-i ${WORK_DIR}/20news-vectors/tfidf-vectors
+--trainingOutput ${WORK_DIR}/20news-train-vectors
+--testOutput ${WORK_DIR}/20news-test-vectors
+--randomSelectionPct 40 --overwrite --sequenceFiles -xm sequential
+
+
+As result of this command, we will have two new folders containing the training and testing
+vectors. Now, it is time to train our Naïves Bayes algorithm on the training set of vectors, and
+the command that is used is pretty easy:
+./mahout trainnb
+-i ${WORK_DIR}/20news-train-vectors -el
+-o ${WORK_DIR}/model
+-li ${WORK_DIR}/labelindex
+-ow
+
+Once finished, we have our training model ready to be tested against the remaining 20
+percent of the initial input vectors. The final console command is as follows:
+
+./mahout testnb
+-i ${WORK_DIR}/20news-test-vectors
+-m ${WORK_DIR}/model
+-l ${WORK_DIR}/labelindex\
+-ow -o ${WORK_DIR}/20news-testing
