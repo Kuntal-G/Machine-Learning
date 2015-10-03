@@ -8,21 +8,25 @@ import au.com.bytecode.opencsv.CSVReader;
 import java.util.HashMap;
 
 public class WatsonCsvMap {
+	
 	private String filePath;
 	private char separator = ',';
 	private HashMap<String, HashMap<String, String>> courseMap ;
+	
 	public HashMap<String, HashMap<String, String>> getCourseMap() {
 		return courseMap;
 	}
-	public WatsonCsvMap(String filePath,char separator)
-	{
+	
+	public WatsonCsvMap(String filePath,char separator)	{
 		this.filePath = filePath;
 		this.separator = separator;
 		courseMap = new HashMap<String, HashMap<String, String>>();
 		readCsvFile();
+		
 	}
-	public void readCsvFile()
-	{
+	
+	
+	public void readCsvFile(){
 		CSVReader reader = null;
 		HashMap<String, String> keys;
 		try
@@ -40,6 +44,7 @@ public class WatsonCsvMap {
 				for(int i=1;i<columnName.length;i++){
 					keys.put(columnName[i].toLowerCase(), nextLine[i].toLowerCase());
 				}
+				System.out.println("Name: "+courseName+"  Keys:"+keys);
 				courseMap.put(courseName, keys);
 			}
 		}

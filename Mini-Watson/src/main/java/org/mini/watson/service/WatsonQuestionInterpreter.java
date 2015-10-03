@@ -20,8 +20,9 @@ public class WatsonQuestionInterpreter {
 		printInfo();
 		if (input.getCourseMap().containsKey(course)) {
 			keys = input.getCourseMap().get(course);
+			
 			if (keys.containsKey(verb)) {
-				return keys.get(verb);
+				return keys.get(verb)+" " +keys.get(answer);
 			}
 		}
 		return noAnswer;

@@ -29,7 +29,7 @@ public class WatsonQuestionTokenizer {
 	public void tokenize() throws FileNotFoundException
 	{
 		tokenized = new String();
-		InputStream modelIn= new FileInputStream("en-token.bin");
+		InputStream modelIn= new FileInputStream("/home/kuntal/git/Machine-Learning/Mini-Watson/src/main/resources/model/en-token.bin");
 		try {
 			TokenizerModel model = new TokenizerModel(modelIn);
 			modelIn.close();
@@ -39,6 +39,7 @@ public class WatsonQuestionTokenizer {
 			{
 				tokenized = tokenized.concat(tokens[i]+" ");
 			}
+			System.out.println("Tokeninez string--"+tokenized);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -59,7 +60,10 @@ public class WatsonQuestionTokenizer {
 			biggestNP = p.toString().length();
 			info.setCourse(p.toString());
 		}
-		//INSERT THE SOLUTION OF THE EXERCISE HERE, IT TAKES ABOUT 2 LINES OF CODE
+		
+		info.setVerb("verb");
+		info.setAnswer("answer");
+		
 		
 		for (Parse child : p.getChildren()) {
 			getNounPhrases(child);
@@ -67,7 +71,7 @@ public class WatsonQuestionTokenizer {
 	}
 	public void run() throws Exception {
 		biggestNP = 0;
-		InputStream is = new FileInputStream("en-parser-chunking.bin");
+		InputStream is = new FileInputStream("/home/kuntal/git/Machine-Learning/Mini-Watson/src/main/resources/model/en-parser-chunking.bin");
 		ParserModel model = new ParserModel(is);
 		is.close();
 		Parser parser = ParserFactory.create(model);
@@ -83,13 +87,11 @@ public class WatsonQuestionTokenizer {
 		info.setInput(map);
 		return info.findTheAnswer();
 	}
-	public void print(WatsonCsvMap map,String question) throws FileNotFoundException,
-	Exception{
-		for (Map.Entry<String, HashMap<String, String>> entry :
-			map.getCourseMap().entrySet()) {
+	public void print(WatsonCsvMap map,String question) throws FileNotFoundException,Exception{
+		for (Map.Entry<String, HashMap<String, String>> entry :	map.getCourseMap().entrySet()) {
 			line = (question +" "+ entry.getKey()+"?").toLowerCase();
 			run();
-			System.out.println(entry.getKey()+" : "+findTheAnswer(map));
+			System.out.println("Print in Tokenizer"+entry.getKey()+" : "+findTheAnswer(map));
 		}
 	}
 }

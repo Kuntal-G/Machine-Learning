@@ -30,7 +30,7 @@ public final class WatsonInterface extends JFrame{
 	
 	private String dir = System.getProperty("user.dir");
 	private String imagePath = /*dir+*/ "/home/kuntal/Downloads/watsonlogo.png";
-	private String defaulTextMessage = "Insert your questions here";
+	private String defaulTextMessage = "";
 	private JButton submitButton,openFileButton;
 	private JPanel questionPanel,buttonsPanel,picturePanel;
 	private JLabel pictureLabel;
@@ -91,10 +91,12 @@ public final class WatsonInterface extends JFrame{
 		//@Override
 		public void actionPerformed(ActionEvent e) {
 			String question = inputTextField.getText();
-			//INSERT THE SOLUTION OF THE EXERCISE HERE, IT TAKES ABOUT 3 LINES	OF CODE
 			st = new WatsonQuestionTokenizer(question);
+			
 			try {
 				st.run();
+				//st.print(cl, question);
+				
 			} catch (Exception ex) {
 				Logger.getLogger(WatsonInterface.class.getName()).log(Level.SEVERE, null, ex);
 			}
