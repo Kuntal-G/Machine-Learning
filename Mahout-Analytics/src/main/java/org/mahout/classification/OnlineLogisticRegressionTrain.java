@@ -22,23 +22,25 @@ import com.google.common.base.Charsets;
 
 
 public class OnlineLogisticRegressionTrain {
-	  private static double predictorWeight(OnlineLogisticRegression lr, int row, RecordFactory csv, String predictor) {
+	  
+	private static double predictorWeight(OnlineLogisticRegression lr, int row, RecordFactory csv, String predictor) {
 		    double weight = 0;
 		    for (Integer column : csv.getTraceDictionary().get(predictor)) {
 		      weight += lr.getBeta().get(row, column);
 		    }
 		    return weight;
 		  }
+	
+	
     public static void main(String[] args) throws IOException 
     {
-    	String inputFile = "input_bank_data.csv";
-    	String outputFile = "/model";
+    	String inputFile = "/home/kuntal/git/Machine-Learning/Mahout-Analytics/src/main/resources/data/input_bank_data.csv";
+    	String outputFile = "/home/kuntal/Downloads/github-notes/data/mahout/model";
         
         List<String> predictorList =Arrays.asList("age","job","marital","education","default",
         		"housing","loan","contact","month","day_of_week","duration","campaign","pdays","previous","poutcome",
         		"emp.var.rate","cons.price.idx","cons.conf.idx","euribor3m","nr.employed");
-        List<String> typeList = Arrays.asList("n", "w", "w", "w", "w", "w", "w", "w", "w", "w", "n", "n", "n", "n",
-        		"w", "n", "n", "n", "n", "n");
+        List<String> typeList = Arrays.asList("n", "w", "w", "w", "w", "w", "w", "w", "w", "w", "n", "n", "n", "n","w", "n", "n", "n", "n", "n");
         
         LogisticModelParameters lmp = new LogisticModelParameters();
         lmp.setTargetVariable("y");
@@ -54,14 +56,10 @@ public class OnlineLogisticRegressionTrain {
 
         CsvRecordFactory csv = lmp.getCsvRecordFactory();
         lr = lmp.createRegression();
-
-        
         int k = 0;
         
         for (int pass = 0; pass < passes; pass++) {
                 BufferedReader in = new BufferedReader(new FileReader(inputFile));
-
-                
                 csv.firstLine(in.readLine());
 
                 String line = in.readLine();
@@ -70,21 +68,15 @@ public class OnlineLogisticRegressionTrain {
                   
                   Vector input = new RandomAccessSparseVector(lmp.getNumFeatures());
                   int targetValue = csv.processLine(line, input);
-
                   // update model
                   lr.train(targetValue, input);
                   k++;
-
                   line = in.readLine();
                   lineCount++;
                 }
                 in.close();
               }
 
-/*            best = model.getBest();
-            if (best != null) {
-              learner = best.getPayload().getLearner();
-            }*/
 
 
             OutputStream modelOutput = new FileOutputStream(outputFile);

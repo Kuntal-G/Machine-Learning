@@ -15,6 +15,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.util.Version;
 import org.apache.mahout.classifier.naivebayes.BayesUtils;
 import org.apache.mahout.classifier.naivebayes.NaiveBayesModel;
 import org.apache.mahout.classifier.naivebayes.StandardNaiveBayesClassifier;
@@ -74,7 +75,7 @@ public class NaiveBayesClassifier {
 		
 		// analyzer used to extract word from tweet
 		Analyzer analyzer = new StandardAnalyzer();
-		
+		analyzer.setVersion(Version.LUCENE_5_2_1);
 		int labelCount = labels.size();
 		int documentCount = documentFrequency.get(-1).intValue();
 		

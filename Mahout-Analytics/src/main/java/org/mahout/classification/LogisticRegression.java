@@ -27,7 +27,7 @@ public class LogisticRegression {
 
 		// Load the input data
 		List<Observation> trainingData = logisticRegression
-				.parseInputFile("/home/kuntal/knowledge/IDE/workspace_practice/MahoutClassification/src/main/resources/inputData.csv");
+				.parseInputFile("/home/kuntal/git/Machine-Learning/Mahout-Analytics/src/main/resources/data/inputData.csv");
 
 		// Train a model
 		OnlineLogisticRegression olr = logisticRegression.train(trainingData);
@@ -67,8 +67,7 @@ public class LogisticRegression {
 	}
 
 	public OnlineLogisticRegression train(List<Observation> trainData) {
-		OnlineLogisticRegression olr = new OnlineLogisticRegression(2, 4,
-				new L1());
+		OnlineLogisticRegression olr = new OnlineLogisticRegression(2, 4,new L1());
 		// Train the model using 30 passes
 		for (int pass = 0; pass < 30; pass++) {
 			for (Observation observation : trainData) {
@@ -81,24 +80,19 @@ public class LogisticRegression {
 					eval.add(observation.getActual(),
 							olr.classifyScalar(observation.getVector()));
 				}
-				System.out.format(
-						"Pass: %2d, Learning rate: %2.4f, Accuracy: %2.4f\n",
-						pass, olr.currentLearningRate(), eval.auc());
+				System.out.format("Pass: %2d, Learning rate: %2.4f, Accuracy: %2.4f\n",pass, olr.currentLearningRate(), eval.auc());
 			}
 		}
 		return olr;
 	}
 
 	void testModel(OnlineLogisticRegression olr) {
-		Observation newObservation = new Observation(new String[] { "family",
-				"10", "100000", "0" });
+		Observation newObservation = new Observation(new String[] { "family","10", "100000", "0" });
 		Vector result = olr.classifyFull(newObservation.getVector());
 
 		System.out.println("------------- Testing -------------");
-		System.out.format("Probability of not fraud (0) = %.3f\n",
-				result.get(0));
-		System.out.format("Probability of fraud (1)     = %.3f\n",
-				result.get(1));
+		System.out.format("Probability of not fraud (0) = %.3f\n",result.get(0));
+		System.out.format("Probability of fraud (1)     = %.3f\n",result.get(1));
 	}
 
 	class Observation {
@@ -106,17 +100,14 @@ public class LogisticRegression {
 		private int actual;
 
 		public Observation(String[] values) {
-			ConstantValueEncoder interceptEncoder = new ConstantValueEncoder(
-					"intercept");
-			StaticWordValueEncoder encoder = new StaticWordValueEncoder(
-					"feature");
+			ConstantValueEncoder interceptEncoder = new ConstantValueEncoder("intercept");
+			StaticWordValueEncoder encoder = new StaticWordValueEncoder("feature");
 
 			interceptEncoder.addToVector("1", vector);
 			vector.set(0, Double.valueOf(values[1]));
 			// Feature scaling, divide mileage by 10000
 			vector.set(1, Double.valueOf(values[2]) / 10000);
 			encoder.addToVector(values[0], vector);
-
 			this.actual = Integer.valueOf(values[3]);
 		}
 

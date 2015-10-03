@@ -19,6 +19,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.util.Version;
 import org.apache.mahout.classifier.naivebayes.NaiveBayesModel;
 import org.apache.mahout.classifier.naivebayes.StandardNaiveBayesClassifier;
 import org.apache.mahout.classifier.naivebayes.training.TrainNaiveBayesJob;
@@ -45,13 +46,13 @@ public class NaiveBayesSentimentAnalysis {
 
 	Configuration configuration = new Configuration();
 
-	String inputFilePath = "input/tweets.txt";
-	String sequenceFilePath = "input/tweets-seq";
-	String labelIndexPath = "input/labelindex";
-	String modelPath = "input/model";
-	String vectorsPath = "input/tweets-vectors";
-	String dictionaryPath = "input/tweets-vectors/dictionary.file-0";
-	String documentFrequencyPath = "input/tweets-vectors/df-count/part-r-00000";
+	String inputFilePath = "/home/kuntal/git/Machine-Learning/Mahout-Analytics/src/main/resources/data/tweets.txt";
+	String sequenceFilePath = "/home/kuntal/Downloads/github-notes/data/mahout/tweets-seq";
+	String labelIndexPath = "/home/kuntal/Downloads/github-notes/data/mahout/labelindex";
+	String modelPath = "/home/kuntal/Downloads/github-notes/data/mahout/model";
+	String vectorsPath = "/home/kuntal/Downloads/github-notes/data/mahout/tweets-vectors";
+	String dictionaryPath = "/home/kuntal/Downloads/github-notes/data/mahout/tweets-vectors/dictionary.file-0";
+	String documentFrequencyPath = "/home/kuntal/Downloads/github-notes/data/mahout/tweets-vectors/df-count/part-r-00000";
 
 	public static void main(String[] args) throws Throwable {
 		NaiveBayesSentimentAnalysis nb = new NaiveBayesSentimentAnalysis();
@@ -62,14 +63,13 @@ public class NaiveBayesSentimentAnalysis {
 	}
 
 	public void inputDataToSequenceFile() throws Exception {
-		BufferedReader reader = new BufferedReader(
-				new FileReader(inputFilePath));
+		BufferedReader reader = new BufferedReader(	new FileReader(inputFilePath));
 		FileSystem fs = FileSystem.getLocal(configuration);
 		Path seqFilePath = new Path(sequenceFilePath);
 		fs.delete(seqFilePath, false);
-		SequenceFile.Writer writer = SequenceFile.createWriter(fs,
-				configuration, seqFilePath, Text.class, Text.class);
+		SequenceFile.Writer writer = SequenceFile.createWriter(fs,configuration, seqFilePath, Text.class, Text.class);
 		int count = 0;
+		
 		try {
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -92,9 +92,7 @@ public class NaiveBayesSentimentAnalysis {
 	void trainNaiveBayesModel() throws Exception {
 		TrainNaiveBayesJob trainNaiveBayes = new TrainNaiveBayesJob();
 		trainNaiveBayes.setConf(configuration);
-		trainNaiveBayes.run(new String[] { "-i",
-				vectorsPath + "/tfidf-vectors", "-o", modelPath, "-li",
-				labelIndexPath, "-el", "-c", "-ow" });
+		trainNaiveBayes.run(new String[] { "-i",vectorsPath + "/tfidf-vectors", "-o", modelPath, "-li",	labelIndexPath, "-el", "-c", "-ow" });
 	}
 
 	private void classifyNewTweet(String tweet) throws IOException {
@@ -109,16 +107,14 @@ public class NaiveBayesSentimentAnalysis {
 
 		// Extract the words from the new tweet using Lucene
 		Analyzer analyzer = new StandardAnalyzer();
-		TokenStream tokenStream = analyzer.tokenStream("text",
-				new StringReader(tweet));
-		CharTermAttribute termAttribute = tokenStream
-				.addAttribute(CharTermAttribute.class);
+		analyzer.setVersion(Version.LUCENE_5_2_1);
+		TokenStream tokenStream = analyzer.tokenStream("text",new StringReader(tweet));
+		CharTermAttribute termAttribute = tokenStream.addAttribute(CharTermAttribute.class);
 		tokenStream.reset();
 		int wordCount = 0;
 		while (tokenStream.incrementToken()) {
 			if (termAttribute.length() > 0) {
-				String word = tokenStream.getAttribute(CharTermAttribute.class)
-						.toString();
+				String word = tokenStream.getAttribute(CharTermAttribute.class).toString();
 				Integer wordId = dictionary.get(word);
 				// If the word is not in the dictionary, skip it
 				if (wordId != null) {
@@ -140,16 +136,13 @@ public class NaiveBayesSentimentAnalysis {
 			int count = entry.getCount();
 			Integer wordId = dictionary.get(word);
 			Long freq = documentFrequency.get(wordId);
-			double tfIdfValue = tfidf.calculate(count, freq.intValue(),
-					wordCount, documentCount);
+			double tfIdfValue = tfidf.calculate(count, freq.intValue(),	wordCount, documentCount);
 			vector.setQuick(wordId, tfIdfValue);
 		}
 
 		// Model is a matrix (wordId, labelId) => probability score
-		NaiveBayesModel model = NaiveBayesModel.materialize(
-				new Path(modelPath), configuration);
-		StandardNaiveBayesClassifier classifier = new StandardNaiveBayesClassifier(
-				model);
+		NaiveBayesModel model = NaiveBayesModel.materialize(new Path(modelPath), configuration);
+		StandardNaiveBayesClassifier classifier = new StandardNaiveBayesClassifier(model);
 
 		// With the classifier, we get one score for each label.The label with
 		// the highest score is the one the tweet is more likely to be
@@ -178,23 +171,18 @@ public class NaiveBayesSentimentAnalysis {
 		analyzer.close();
 	}
 
-	public static Map<String, Integer> readDictionary(Configuration conf,
-			Path dictionnaryPath) {
+	public static Map<String, Integer> readDictionary(Configuration conf,Path dictionnaryPath) {
 		Map<String, Integer> dictionnary = new HashMap<String, Integer>();
-		for (Pair<Text, IntWritable> pair : new SequenceFileIterable<Text, IntWritable>(
-				dictionnaryPath, true, conf)) {
+		for (Pair<Text, IntWritable> pair : new SequenceFileIterable<Text, IntWritable>(dictionnaryPath, true, conf)) {
 			dictionnary.put(pair.getFirst().toString(), pair.getSecond().get());
 		}
 		return dictionnary;
 	}
 
-	public static Map<Integer, Long> readDocumentFrequency(Configuration conf,
-			Path documentFrequencyPath) {
+	public static Map<Integer, Long> readDocumentFrequency(Configuration conf,Path documentFrequencyPath) {
 		Map<Integer, Long> documentFrequency = new HashMap<Integer, Long>();
-		for (Pair<IntWritable, LongWritable> pair : new SequenceFileIterable<IntWritable, LongWritable>(
-				documentFrequencyPath, true, conf)) {
-			documentFrequency
-					.put(pair.getFirst().get(), pair.getSecond().get());
+		for (Pair<IntWritable, LongWritable> pair : new SequenceFileIterable<IntWritable, LongWritable>(documentFrequencyPath, true, conf)) {
+			documentFrequency.put(pair.getFirst().get(), pair.getSecond().get());
 		}
 		return documentFrequency;
 	}
