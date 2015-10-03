@@ -1,9 +1,9 @@
-package com.arc.sentiment.classifiers;
+package com.nlp.sentiment.classifiers;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.arc.sentiment.loadclassifiermodels.LoadStanfordSentimentModel;
+import com.nlp.sentiment.loadclassifiermodels.LoadStanfordSentimentModel;
 
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -20,8 +20,7 @@ public class StanfordSentimentClassifier implements SentimentClassifier {
 
 		String retLabel = "";
 
-		StanfordCoreNLP pipeline = LoadStanfordSentimentModel
-				.getStanfordModelInstance();
+		StanfordCoreNLP pipeline = LoadStanfordSentimentModel.getStanfordModelInstance();
 		Annotation document = new Annotation(text);
 		pipeline.annotate(document);
 		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
@@ -61,15 +60,11 @@ public class StanfordSentimentClassifier implements SentimentClassifier {
 		return finalLabel;
 	}
 	
-	static String decideSentimentByCount(
-			HashMap<String, Double> sentimentCountMap, List<CoreMap> sentences) {
+	static String decideSentimentByCount(HashMap<String, Double> sentimentCountMap, List<CoreMap> sentences) {
 		String sentiment = "";
-		Double countPos = sentimentCountMap.get("Positive") == null ? 0.0
-				: sentimentCountMap.get("Positive");
-		Double countNeg = sentimentCountMap.get("Negative") == null ? 0.0
-				: sentimentCountMap.get("Negative");
-		Double countNeutral = sentimentCountMap.get("Neutral") == null ? 0.0
-				: sentimentCountMap.get("Neutral");
+		Double countPos = sentimentCountMap.get("Positive") == null ? 0.0: sentimentCountMap.get("Positive");
+		Double countNeg = sentimentCountMap.get("Negative") == null ? 0.0: sentimentCountMap.get("Negative");
+		Double countNeutral = sentimentCountMap.get("Neutral") == null ? 0.0: sentimentCountMap.get("Neutral");
 		if (countPos == countNeg) {
 			sentiment = "Neutral";
 		} else if (countPos > countNeg && countPos > countNeutral) {

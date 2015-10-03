@@ -1,6 +1,6 @@
-package com.arc.sentiment.model;
+package com.nlp.sentiment.model;
 
-import com.arc.sentiment.classifiers.SentimentDriver;
+import com.nlp.sentiment.classifiers.SentimentDriver;
 
 public class SentimentWrapper {
 	

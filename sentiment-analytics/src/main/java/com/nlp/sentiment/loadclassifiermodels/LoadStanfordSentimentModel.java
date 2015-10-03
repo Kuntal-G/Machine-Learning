@@ -1,4 +1,4 @@
-package com.arc.sentiment.loadclassifiermodels;
+package com.nlp.sentiment.loadclassifiermodels;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import java.util.HashMap;

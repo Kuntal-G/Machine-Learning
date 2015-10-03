@@ -1,4 +1,4 @@
-package com.arc.sentiment.service;
+package com.nlp.sentiment.service;
 
 import java.io.IOException;
 
@@ -9,9 +9,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.arc.sentiment.model.SentimentRequest;
-import com.arc.sentiment.model.SentimentResponse;
-import com.arc.sentiment.model.SentimentWrapper;
+import com.nlp.sentiment.model.SentimentRequest;
+import com.nlp.sentiment.model.SentimentResponse;
+import com.nlp.sentiment.model.SentimentWrapper;
 
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)

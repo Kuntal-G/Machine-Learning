@@ -1,7 +1,7 @@
-package com.arc.sentiment.classifiers;
+package com.nlp.sentiment.classifiers;
 
 import com.aliasi.classify.LMClassifier;
-import com.arc.sentiment.loadclassifiermodels.LoadLingPipeSentimentModel;
+import com.nlp.sentiment.loadclassifiermodels.LoadLingPipeSentimentModel;
 
 
 public class LingPipeSentimentClassifier implements SentimentClassifier{

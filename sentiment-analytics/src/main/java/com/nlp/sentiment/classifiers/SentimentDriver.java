@@ -1,4 +1,4 @@
-package com.arc.sentiment.classifiers;
+package com.nlp.sentiment.classifiers;
 
 
 public class SentimentDriver {
@@ -15,8 +15,7 @@ public class SentimentDriver {
 	
 	public static String getLabel(String text, String classifierType){
 		SentimentClassifierFactory sentimentClassifierFactory = new SentimentClassifierFactory();
-		SentimentClassifier sentimentClassifier = sentimentClassifierFactory
-				.getSentimentClassifier(classifierType);
+		SentimentClassifier sentimentClassifier = sentimentClassifierFactory.getSentimentClassifier(classifierType);
 		String label=sentimentClassifier.getSentiment(text);
 		return label;
 	}

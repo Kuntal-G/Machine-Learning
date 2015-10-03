@@ -1,4 +1,4 @@
-package com.arc.sentiment.configuration;
+package com.nlp.sentiment.configuration;
 
 import java.io.BufferedReader;
 import java.io.File;

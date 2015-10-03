@@ -1,11 +1,11 @@
-package com.arc.sentiment.loadclassifiermodels;
+package com.nlp.sentiment.loadclassifiermodels;
 
 import java.io.File;
 import java.io.IOException;
 
 import com.aliasi.classify.LMClassifier;
 import com.aliasi.util.AbstractExternalizable;
-import com.arc.sentiment.configuration.Configuration;
+import com.nlp.sentiment.configuration.Configuration;
 
 
 /**

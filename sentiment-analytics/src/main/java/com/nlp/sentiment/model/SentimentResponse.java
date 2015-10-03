@@ -1,4 +1,4 @@
-package com.arc.sentiment.model;
+package com.nlp.sentiment.model;
 
 public class SentimentResponse {
 	String text;

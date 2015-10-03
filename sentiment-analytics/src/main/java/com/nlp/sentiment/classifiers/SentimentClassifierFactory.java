@@ -1,4 +1,4 @@
-package com.arc.sentiment.classifiers;
+package com.nlp.sentiment.classifiers;
 
 public class SentimentClassifierFactory {
 

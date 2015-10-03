@@ -1,4 +1,4 @@
-package com.arc.sentiment.classifiers;
+package com.nlp.sentiment.classifiers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
