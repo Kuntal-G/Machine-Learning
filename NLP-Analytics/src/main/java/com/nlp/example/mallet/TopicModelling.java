@@ -45,8 +45,7 @@ public class TopicModelling {
         InstanceList instances = new InstanceList (new SerialPipes(pipeList));
 
         Reader fileReader = new InputStreamReader(new FileInputStream(new File("/home/kuntal/Downloads/CodeSet/mallet-TopicModelling-data.txt")), "UTF-8");
-        instances.addThruPipe(new CsvIterator (fileReader, Pattern.compile("^(\\S*)[\\s,]*(\\S*)[\\s,]*(.*)$"),
-                                               3, 2, 1)); // data, label, name fields
+        instances.addThruPipe(new CsvIterator (fileReader, Pattern.compile("^(\\S*)[\\s,]*(\\S*)[\\s,]*(.*)$"),3, 2, 1)); // data, label, name fields
 
         // Create a model with 100 topics, alpha_t = 0.01, beta_w = 0.01
         //  Note that the first parameter is passed as the sum over topics, while
