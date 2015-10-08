@@ -29,7 +29,7 @@ public final class WatsonInterface extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private String dir = System.getProperty("user.dir");
-	private String imagePath = /*dir+*/ "/home/kuntal/Downloads/watsonlogo.png";
+	private String imagePath = /*dir+*/ "/home/kuntal/git/Machine-Learning/Mini-Watson/src/main/resources/image/watsonlogo.png";
 	private String defaulTextMessage = "";
 	private JButton submitButton,openFileButton;
 	private JPanel questionPanel,buttonsPanel,picturePanel;

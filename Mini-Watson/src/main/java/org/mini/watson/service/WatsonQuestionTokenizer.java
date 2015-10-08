@@ -58,7 +58,7 @@ public class WatsonQuestionTokenizer {
 		if ((p.getType().equals("NP")||p.getType().equals("P"))&& p.toString().length()>biggestNP)
 		{
 			biggestNP = p.toString().length();
-			info.setCourse(p.toString());
+			info.setTermKey(p.toString());
 		}
 		
 		info.setVerb("verb");

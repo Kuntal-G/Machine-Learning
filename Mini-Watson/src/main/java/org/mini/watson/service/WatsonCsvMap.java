@@ -11,16 +11,16 @@ public class WatsonCsvMap {
 	
 	private String filePath;
 	private char separator = ',';
-	private HashMap<String, HashMap<String, String>> courseMap ;
+	private HashMap<String, HashMap<String, String>> csvMap ;
 	
 	public HashMap<String, HashMap<String, String>> getCourseMap() {
-		return courseMap;
+		return csvMap;
 	}
 	
 	public WatsonCsvMap(String filePath,char separator)	{
 		this.filePath = filePath;
 		this.separator = separator;
-		courseMap = new HashMap<String, HashMap<String, String>>();
+		csvMap = new HashMap<String, HashMap<String, String>>();
 		readCsvFile();
 		
 	}
@@ -44,8 +44,8 @@ public class WatsonCsvMap {
 				for(int i=1;i<columnName.length;i++){
 					keys.put(columnName[i].toLowerCase(), nextLine[i].toLowerCase());
 				}
-				System.out.println("Name: "+courseName+"  Keys:"+keys);
-				courseMap.put(courseName, keys);
+				//System.out.println("Name: "+courseName+"  Keys:"+keys);
+				csvMap.put(courseName, keys);
 			}
 		}
 		catch (Exception e) {
