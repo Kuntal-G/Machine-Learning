@@ -1,5 +1,5 @@
 # Churn Analytics
 
-This project is described in details at : www.kuntalganguly.com
+This project is described in details at : http://www.kuntalganguly.com
 
 
