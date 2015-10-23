@@ -1,19 +1,58 @@
-Machine Learning Repository containing following projects:
--------------------------------------------------------------
+# Machine Learning:
 
-#Coursera-008
-This contains the programming exercise of the coursera Machine Learning course (ML008- https://www.coursera.org/course/ml) from Stanford University by Prof. Andrew NG. It's done with Octave programming language.
+This repository consist of the following projects:
+
+## Predictive Analytics Service
+This project exposes the various machine learning models (Classifier, Recommender System, Topic Modeling, Text Summarization, Forecasting Trends,etc) as web service(rest). Its shows how to deploy & use machine learning in production after the model is build, validated and evaluated.
 
 
-#Machine Learning-Mahout:
-This contains the recommender system (User & Item) based with Apache Mahout.
+## Mahout Analytics
+This projects contains the Recommender system ,Classification and Clustering example with Apache Mahout.
 
-#Machine Learning-R:
-Real World example of Machine Learning(supervised & unsupervised) with R programming Language.
-Example with R-Hadoop, R-Hbase and R-Hive to process big dataset.Also deeplearning with H2O.
 
-#Machine Learning-Python:
-Real usecase example of Machine Learning(supervised & unsupervised) with python programming Language.
+## Churn Analytics
+The goal of churn analytics project is to understand the primary drivers to churn and predict
+churn using R and Apache Mahout.
 
-#Machine Learning-Spark(MLIB):
-High Scalable Machine Learning(supervised & unsupervised) example  with Spark.It's done with Scala and Python programming language.
+
+## Machine Learning with R
+Real world examples of Machine Learning :
+
+a) Regression
+b) Classification
+c) Nearest Neighbor
+d) Boosting
+e) Feature Engineering 
+f) Time Series forecasting
+
+
+## Machine Learning with Python ()
+Real world examples of Machine Learning using (Sci-kit Learn, GraphLab) :
+
+a) Regression 
+b) Deep Learning [Image classification & similar Image Retrieval], 
+c) Classification 
+d) Support Vector Machine
+e) Boosting 
+f) Churn Analytics
+
+Also some basic web scraping using Beautiful Soup.
+
+
+## Natural Language Processing
+Some commonly used examples of NLP using OpenNLP, StanfordCoreNLP, LingPipe, Mallet and Carrot :
+
+a) Tokenizer
+b) Name Finder
+c) Sentence Detection
+d) Sentiment Analysis
+e) POS Detection
+f) Topic Modeling
+
+
+## Mini Watson
+This project is a part of lab exercise done during the course "Analyzing Big Data with a Concept IBM Watson" from Big Data University. Its a simple Question Answering system using OpenNLP.
+
+
+## Coursera-008
+This contains the programming exercise of the Coursera Machine Learning course (ML008- https://www.coursera.org/course/ml) from Stanford University by Prof. Andrew NG.

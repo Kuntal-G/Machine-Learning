@@ -1,14 +1,14 @@
 # Mahout-Analytics
 
+This projects contains following examples with Apache Mahout.
 
 
-## Classification
+1) Classification using Logistic Regression.
 
+2) Recommendation System (User based, Item based, SVD) and its evaluation.
 
+3) Clustering using Kmeans and Canopy.
 
-## Recommendation System
+4) Sentiment Analysis of twitter data using Naive Bayes model.
 
-
-
-## Clustering
 
