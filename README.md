@@ -26,7 +26,7 @@ e) Feature Engineering
 f) Time Series forecasting
 
 
-## Machine Learning with Python ()
+## Machine Learning with Python
 Real world examples of Machine Learning using (Sci-kit Learn, GraphLab) :
 
 a) Regression 
