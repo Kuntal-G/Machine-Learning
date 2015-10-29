@@ -94,10 +94,10 @@ confusionMatrix (cleanTrain$incomelevel, predict (boostFit, cleanTrain))
 
 
 
-##Model Validation
-cleanTest$predicted = predict (boostFit, cleanTest) confusionMatrix (cleanTest$incomelevel, cleanTest$predicted) 
+##Model Validation on Test set data
+cleanTest$predicted = predict (boostFit, cleanTest)
 
-#Validation Test set data
+# Accuracy
 
 confusionMatrix (cleanTest$incomelevel, cleanTest$predicted) 
 
