@@ -12,6 +12,7 @@ public class Configuration {
   private static String RESOURCE_HOME;
   public static String SENTENCE_MODEL;
   public static String LINGPIPE_MODEL;
+  public static String OPENNLP_MODEL;
   private static String CONF_FILE_PATH="./conf/configuration.properties";
   
   public static HashMap<String, String> CONFIGURATION_MAP;
@@ -53,6 +54,7 @@ public class Configuration {
 		RESOURCE_HOME=CONFIGURATION_MAP.get("RESOURCE_HOME");
 		SENTENCE_MODEL=RESOURCE_HOME+CONFIGURATION_MAP.get("SENTENCE_MODEL");
 		LINGPIPE_MODEL=RESOURCE_HOME+CONFIGURATION_MAP.get("LINGPIPE_MODEL");
+		OPENNLP_MODEL=RESOURCE_HOME+CONFIGURATION_MAP.get("OPENNLP_MODEL");
 		
 	}
   

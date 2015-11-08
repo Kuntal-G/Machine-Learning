@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.analytics.nlp.sentiment.loadclassifiermodels.LoadOpenNlpSentimentModel;
+
 import opennlp.tools.doccat.DoccatModel;
 import opennlp.tools.doccat.DocumentCategorizerME;
 import opennlp.tools.doccat.DocumentSampleStream;
@@ -14,9 +16,8 @@ import opennlp.tools.util.TrainingParameters;
 public class OpenNLPClassifier implements SentimentClassifier {
 
 	public String getSentiment(String text) {
-		DoccatModel model=trainModel();
 		String retLabel = "";
-		DocumentCategorizerME myCategorizer = new DocumentCategorizerME(model);
+		DocumentCategorizerME myCategorizer = LoadOpenNlpSentimentModel.getClassiferInstance();
 		double[] outcomes = myCategorizer.categorize(text);
 		String category = myCategorizer.getBestCategory(outcomes);
 
@@ -26,36 +27,6 @@ public class OpenNLPClassifier implements SentimentClassifier {
 			retLabel="Negative";
 		}
 
-		return null;
-	}
-
-	private DoccatModel trainModel(){
-
-		InputStream dataIn = null;
-		try {
-
-			dataIn = new FileInputStream("input/tweets.txt");
-
-			ObjectStream lineStream = new PlainTextByLineStream(dataIn,"en");
-			ObjectStream sampleStream = new DocumentSampleStream(lineStream);
-
-			// Specifies the minimum number of times a feature must be seen
-			int cutoff = 2;
-			int trainingIterations = 30;
-			DoccatModel model = DocumentCategorizerME.train("en", sampleStream,TrainingParameters.defaultParams());
-			return model;
-		
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (dataIn != null) {
-				try {
-					dataIn.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 		return null;
 	}
 
