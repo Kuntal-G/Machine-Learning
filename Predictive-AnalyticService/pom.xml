@@ -91,22 +91,12 @@
 			<version>18.0</version>
 		</dependency>
 		
-		<!-- Sentiment Service related
+		<!-- Sentiment Service related-->
 		<dependency>
-			<groupId>org.carrot2</groupId>
-			<artifactId>carrot2-core</artifactId>
-			<version>3.10.4</version>
+			<groupId>com.aliasi</groupId>
+			<artifactId>lingpipe</artifactId>
+			<version>4.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.opennlp</groupId>
-			<artifactId>opennlp-maxent</artifactId>
-			<version>3.0.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.opennlp</groupId>
-			<artifactId>opennlp-uima</artifactId>
-			<version>1.6.0</version>
-		</dependency>-->
 		<dependency>
 			<groupId>org.apache.opennlp</groupId>
 			<artifactId>opennlp-tools</artifactId>
@@ -131,6 +121,11 @@
 			<groupId>com.aliasi</groupId>
 			<artifactId>lingpipe</artifactId>
 			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.carrot2</groupId>
+			<artifactId>carrot2-core</artifactId>
+			<version>3.10.3</version>
 		</dependency>
 		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
