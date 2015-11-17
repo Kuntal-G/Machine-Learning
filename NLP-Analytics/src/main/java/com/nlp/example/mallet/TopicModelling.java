@@ -39,12 +39,12 @@ public class TopicModelling {
         // Pipes: lowercase, tokenize, remove stopwords, map to features
         pipeList.add( new CharSequenceLowercase() );
         pipeList.add( new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")) );
-        pipeList.add( new TokenSequenceRemoveStopwords(new File("/home/kuntal/Downloads/CodeSet/stop.txt"), "UTF-8", false, false, false) );
+        pipeList.add( new TokenSequenceRemoveStopwords(new File("/home/kuntal/CodeSet/stop.txt"), "UTF-8", false, false, false) );
         pipeList.add( new TokenSequence2FeatureSequence() );
 
         InstanceList instances = new InstanceList (new SerialPipes(pipeList));
 
-        Reader fileReader = new InputStreamReader(new FileInputStream(new File("/home/kuntal/Downloads/CodeSet/mallet-TopicModelling-data.txt")), "UTF-8");
+        Reader fileReader = new InputStreamReader(new FileInputStream(new File("/home/kuntal/CodeSet/mallet-TopicModelling-data.txt")), "UTF-8");
         instances.addThruPipe(new CsvIterator (fileReader, Pattern.compile("^(\\S*)[\\s,]*(\\S*)[\\s,]*(.*)$"),3, 2, 1)); // data, label, name fields
 
         // Create a model with 100 topics, alpha_t = 0.01, beta_w = 0.01
