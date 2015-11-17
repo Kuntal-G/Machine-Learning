@@ -23,7 +23,7 @@ public class SentimentAnalysisExample {
     }
 
     private static void trainingLingPipeSentimentAnalysis(String[] categories,DynamicLMClassifier  classifier) {
-        String directory = "C:/Current Books/NLP and Java/Downloads/Sentiment Data";
+        String directory = "/home/kuntal/sentiment_data";
         File trainingDirectory = new File(directory, "txt_sentoken");
         System.out.println("\nTraining.");
         for (int i = 0; i < categories.length; ++i) {
