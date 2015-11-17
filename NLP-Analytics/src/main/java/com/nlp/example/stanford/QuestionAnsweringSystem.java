@@ -40,7 +40,7 @@ public class QuestionAnsweringSystem {
 //	        question = "When was the 12th president inaugurated";
 //	        question = "Where is the 30th president's home town?";
 
-	        String parserModel = "C:/Current Books/NLP and Java/Models/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz";
+	        String parserModel = "englishPCFG.ser.gz";
 	        LexicalizedParser lexicalizedParser = LexicalizedParser.loadModel(parserModel);
 
 	        TokenizerFactory<CoreLabel> tokenizerFactory =  PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
