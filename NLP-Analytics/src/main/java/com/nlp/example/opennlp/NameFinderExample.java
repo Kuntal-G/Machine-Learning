@@ -23,7 +23,7 @@ public class NameFinderExample {
                 + "Haywood, but still pretty good. Of course Mr. Adam "
                 + "took the cake!"};
             Tokenizer tokenizer = SimpleTokenizer.INSTANCE;
-            TokenNameFinderModel model = new TokenNameFinderModel(new File("C:\\OpenNLP Models", "en-ner-person.bin"));
+            TokenNameFinderModel model = new TokenNameFinderModel(new File("en-ner-person.bin"));
             NameFinderME finder = new NameFinderME(model);
 
             for (String sentence : sentences) {

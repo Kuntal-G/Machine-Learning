@@ -19,7 +19,7 @@ public class POSDetectionExample {
 	                + "quality of data sent to other elements of a pipeline.";
 
 	        POSModel model = new POSModelLoader()
-	                .load(new File("C:/Current Books/NLP and Java/Models/", "en-pos-maxent.bin"));
+	                .load(new File("en-pos-maxent.bin"));
 	        POSTaggerME tagger = new POSTaggerME(model);
 
 	        String tokens[] = WhitespaceTokenizer.INSTANCE

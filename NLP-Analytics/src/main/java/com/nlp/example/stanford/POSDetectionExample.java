@@ -65,7 +65,7 @@ public class POSDetectionExample {
 	    private static void usingStanfordPOSTagger(String textsentences) {
 	        Properties props = new Properties();
 	        props.put("annotators", "tokenize, ssplit, pos");
-	        props.put("pos.model", "C:\\Current Books in Progress\\NLP and Java\\Models\\english-caseless-left3words-distsim.tagger");
+	        props.put("pos.model", "english-caseless-left3words-distsim.tagger");
 	        props.put("pos.maxlen", 10);
 	        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 	        Annotation document = new Annotation(textsentences);
