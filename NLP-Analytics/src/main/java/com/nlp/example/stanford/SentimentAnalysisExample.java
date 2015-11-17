@@ -48,9 +48,7 @@ public class SentimentAnalysisExample {
         }
 
         // Classifer
-        CRFClassifier crf  = CRFClassifier.getClassifierNoExceptions(
-                        "C:/Current Books in Progress/NLP and Java/Models"
-                        + "/english.all.3class.distsim.crf.ser.gz");
+        CRFClassifier crf  = CRFClassifier.getClassifierNoExceptions("english.all.3class.distsim.crf.ser.gz");
         String S1 = "Good afternoon Rajat Raina, how are you today?";
         String S2 = "I go to school at Stanford University, which is located in California.";
         System.out.println(crf.classifyToString(S1));
