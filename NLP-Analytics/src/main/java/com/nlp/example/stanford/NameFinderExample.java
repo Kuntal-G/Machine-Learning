@@ -18,7 +18,7 @@ public class NameFinderExample {
 			        "Joe wanted to go to Vermont for the day to visit a cousin who "
 			        + "works at IBM, but Sally and he had to look for Fred"};
 		 
-	        String model = "english.conll.4class.distsim.crf.ser.gz";
+	        String model = "/u/nlp/data/depparser/nn/english.conll.4class.distsim.crf.ser.gz";
 	        CRFClassifier<CoreLabel> classifier = CRFClassifier.getClassifierNoExceptions(model);
 
 	        String sentence = "";
